@@ -10,7 +10,7 @@ let closeArr = []
 function newData() {
     fetch(`https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}`).then(response => {
         response.json().then(data => {
-            console.log(data)
+        
      
             let picture = document.getElementById('company-image')
             picture.src = data.profile.image
@@ -26,7 +26,8 @@ function newData() {
             else{
                 changes.style.color = 'green'
             }
-           
+        //    let ggg = document.getElementById('my-example')
+        //     ggg.src = data.profile.image
         })
     })
 }
@@ -34,7 +35,7 @@ function historicalPrice() {
     fetch(`https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`).then(response => {
         response.json().then(data => {
             parsHistoricalPrice(data) 
-            console.log(data)
+           
         })
     })
 }
@@ -85,6 +86,4 @@ function parsHistoricalPrice(data){
     });
 }
 // historicalPriceCart
-console.log(closeArr)
-console.log(dateArr)
-let arr = [1,2,3,4,5]
+

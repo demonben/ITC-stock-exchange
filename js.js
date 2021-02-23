@@ -5,7 +5,7 @@ let loader = document.getElementById('loader')
 let search = document.getElementById('search')
 let line = document.getElementsByTagName("li")
 let url = "https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=AA&limit=10&exchange=NASDAQ"
- // https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}
+// https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}
 
 buttonSearch.addEventListener('click', () => {
     // forSearch()
@@ -23,24 +23,57 @@ function listOfData() {
     })
 }
 
+// async function showAvatar() {
+// 
+//     let response = await fetch('/article/promise-chaining/user.json');
+//     let user = await response.json();
+
 function getResults(data) {
     loader.classList.add('visually-hidden')
     let unorderedList = document.createElement('ul')
     unorderedList.id = 'search-results'
     divResults.appendChild(unorderedList)
-    
+
     for (let i = 0; i < 10; i++) {
         let line = document.createElement("li")
         // line.classList.add('li')
         let anchor = document.createElement('a')
         anchor.href = `/company.html?symbol=${data[i].symbol}`
+        // let symbolCompany = document.createElement('span')
+        // symbolCompany.classList.add('symbol-company')
         anchor.innerText = data[i].name + ` (${data[i].symbol})`
-        
-       
-        divResults.appendChild(anchor)
-        line.appendChild(anchor)
-        unorderedList.appendChild(line)
-    
+
+        showAvatar()
+        async function showAvatar() {
+
+            let response = await fetch(`https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${data[i].symbol}`);
+            let user = await response.json();
+
+            let companyImage = document.createElement('img')
+            
+            // 
+            companyImage.src = user.profile.image
+            // console.log(companyImage)
+            let companyPrice = document.createElement('span')
+            companyPrice.innerText = user.profile.changesPercentage
+            companyPrice.classList.add('percents-changes')
+            if (companyPrice < 0) {
+                companyPrice.style.color = 'red'
+            }
+            else {
+                companyPrice.style.color = 'green'
+            }
+            anchor.appendChild(companyPrice)
+
+            companyImage.classList.add('images')
+            anchor.appendChild(companyImage)
+
+            divResults.appendChild(anchor)
+            line.appendChild(anchor)
+            unorderedList.appendChild(line)
+            // console.log(unorderedList)
+
+        }
     }
 }
 

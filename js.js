@@ -18,15 +18,10 @@ function listOfData() {
     fetch(url).then(response => {
         response.json().then(data => {
             getResults(data)
-            console.log(data)
+
         })
     })
 }
-
-// async function showAvatar() {
-// 
-//     let response = await fetch('/article/promise-chaining/user.json');
-//     let user = await response.json();
 
 function getResults(data) {
     loader.classList.add('visually-hidden')
@@ -36,12 +31,25 @@ function getResults(data) {
 
     for (let i = 0; i < 10; i++) {
         let line = document.createElement("li")
-        // line.classList.add('li')
+        line.classList.add('company-line')
         let anchor = document.createElement('a')
         anchor.href = `/company.html?symbol=${data[i].symbol}`
-        // let symbolCompany = document.createElement('span')
-        // symbolCompany.classList.add('symbol-company')
-        anchor.innerText = data[i].name + ` (${data[i].symbol})`
+        anchor.innerText = data[i].name
+        anchor.classList.add('company-name')
+        let symbolCompany = document.createElement('span')
+        symbolCompany.classList.add('symbol-company')
+        symbolCompany.innerText = ` (${data[i].symbol})`
+        console.log(anchor)
+        anchor.appendChild(typeof symbolCompany)
+
+
+        let marquee = document.getElementsByClassName('marquee')
+        console.log(marquee)
+        let marqueCompany = document.createElement('span')
+        marqueCompany.innerText = data[i].symbol
+        
+        console.log(typeof marqueCompany)
+        marquee.appendChild(marqueCompany)
 
         showAvatar()
         async function showAvatar() {
@@ -50,17 +58,19 @@ function getResults(data) {
             let user = await response.json();
 
             let companyImage = document.createElement('img')
-            
-            // 
+
             companyImage.src = user.profile.image
-            // console.log(companyImage)
+
             let companyPrice = document.createElement('span')
             companyPrice.innerText = user.profile.changesPercentage
             companyPrice.classList.add('percents-changes')
-            if (companyPrice < 0) {
+
+            let percentsChangesSearch = user.profile.changesPercentage
+            let numberPercents = parseFloat(percentsChangesSearch.substring(1, percentsChangesSearch.length - 1))
+            if (numberPercents < 0) {
                 companyPrice.style.color = 'red'
             }
-            else {
+            else if (numberPercents > 0) {
                 companyPrice.style.color = 'green'
             }
             anchor.appendChild(companyPrice)
@@ -71,6 +81,11 @@ function getResults(data) {
             divResults.appendChild(anchor)
             line.appendChild(anchor)
             unorderedList.appendChild(line)
+
+
+            // for (let i = 0; i < 10; i++){
+
+            // }
             // console.log(unorderedList)
 
         }
@@ -81,34 +96,3 @@ function getResults(data) {
 
 
 
-
-// test
-// const urlParams = new URLSearchParams(window.location.search);
-// const myParam = urlParams.get('myParam');
-
-
-// var paramsString = "q=URLUtils.searchParams&topic=api";
-// var searchParams = new URLSearchParams(paramsString);
-
-
-// let linkToCompany = window.location.search
-// console.log(urlParams)
-// test
-
-// function forSearch(){
-//     let newSomething = document.getElementById('search-results')
-//     console.log(newSomething)
-//     if (unorderedList.length > 8){
-//         console.log('gj')
-//         document.getElementById('search-results').remove()
-//         loader.classList.remove('visually-hidden')
-//         url = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=${search.value}&limit=10&exchange=NASDAQ`
-//         listOfData(url)
-
-//     }
-//     else{
-//         document.getElementById('search-results').remove()
-//         loader.classList.remove('visually-hidden')
-//         listOfData() 
-//     }
-// }

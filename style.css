@@ -32,6 +32,7 @@
 }
 .marque-price{
 color:green;
+padding-right: 10px;
 }
 
 /* marque */
@@ -42,7 +43,7 @@ color:green;
             position: relative;
             background: #fefefe;
             color: #333;
-            border: 1px solid #4a4a4a;
+            /* border: 1px solid #4a4a4a; */
         }
         
         .marquee p {

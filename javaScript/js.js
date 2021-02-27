@@ -5,10 +5,8 @@ let loader = document.getElementById('loader')
 let search = document.getElementById('search')
 let line = document.getElementsByTagName("li")
 let url = "https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=AA&limit=10&exchange=NASDAQ"
-// https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}
 
 buttonSearch.addEventListener('click', () => {
-    // forSearch()
     listOfData()
     document.getElementById('search-results').remove()
     loader.classList.remove('visually-hidden')
@@ -18,7 +16,6 @@ function listOfData() {
     fetch(url).then(response => {
         response.json().then(data => {
             getResults(data)
-
         })
     })
 }
@@ -72,23 +69,6 @@ function getResults(data) {
             divResults.appendChild(anchor)
             line.appendChild(anchor)
             unorderedList.appendChild(line)
-
-
-            for (let i = 0; i < 10; i++){
-
-                // marquee start
-                let marquee = document.getElementById('contentMarque')
-                let marqueCompany = document.createElement('span')
-                marqueCompany.innerText = data[i].symbol
-                let marquePrice = document.createElement("span")
-                marquePrice.innerText = user.profile.price
-                marquePrice.classList.add("marque-price")
-
-                marquee.appendChild(marqueCompany)
-                marquee.appendChild(marquePrice)
-                // console.log(marquePrice)
-    // marquee start
-            }
         }
     }
 }

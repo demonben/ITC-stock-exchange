@@ -1,34 +1,57 @@
+// let divResults = document.getElementById('results')
+let loader = document.getElementById('loader')
+let search = document.getElementById('search')
+let line = document.getElementsByTagName("li")
 
-// buttonSearch.addEventListener('click', () => {
-//     let searchValue = document.getElementById('search').value
-    
-//     listOfData(searchValue)
-//     loader.classList.remove('visually-hidden')
-// })
+class SearchResult {
+    constructor() {
+        this.unorderedList = document.getElementById('search-results')
+        this.divResults = document.getElementById('results')
 
-// async function listOfData(searchValue){
-//     const response = await fetch(`https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=${searchValue}&limit=10&exchange=NASDAQ`)
-//     const data = await response.json()
+    }
+    renderResults(data, data1, i) {
+        let line = document.createElement("li")
+        let anchor = document.createElement('a')
+        anchor.href = `/company.html?symbol=${data[i].symbol}`
+        anchor.innerText = data[i].name
 
-//     console.log(data)
-//     console.log(data[0].symbol)
-//     const response1 = await fetch("https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/AAPL")
-//     const data1 = await response1.json()
-//     console.log(data1)
-//     console.log(data1.profile.price)
-//     something(data1)
-//     class Search{
-//         constructor(name, symbol, image, percentage){
-//             this.name = name
-//             this.symbol = symbol
-//             this.image = image
-//             this.percentage = percentage
-//         }
-//            renderResults(){
-//                console.log(`hey ${this.name} GJ ${this.symbol} go ahead ${this.image} almost done ${this.percentage}`)
-//            } 
-//     }
-//     const companyInfo = new Search(data[0].name, data[0].symbol, data1.profile.image, data1.profile.changesPercentage )
-//     companyInfo.renderResults()
-    
-// }
+        this.term = search
+        if (this.term.value !== "") {
+            this.highlight = data[i].name + data[i].symbol
+            this.highlight = this.highlight.replace(new RegExp(this.term.value, "gi"), (match) => `<mark>${match}</mark>`);
+            anchor.innerHTML = this.highlight
+        }
+        let symbolCompany = document.createElement('span')
+        symbolCompany.classList.add('symbol-company')
+        symbolCompany.innerText = ` (${data[i].symbol})`
+
+        anchor.appendChild(symbolCompany)
+
+        let companyImage = document.createElement('img')
+        companyImage.src = data1.profile.image
+        companyImage.classList.add('images')
+
+        let companyPrice = document.createElement('span')
+        companyPrice.innerText = data1.profile.changesPercentage
+        companyPrice.classList.add('percents-changes')
+
+        let percentsChangesSearch = data1.profile.changesPercentage
+        let numberPercents = parseFloat(percentsChangesSearch.substring(1, percentsChangesSearch.length - 1))
+        if (numberPercents < 0) {
+            companyPrice.style.color = 'red'
+        }
+        else if (numberPercents > 0) {
+            companyPrice.style.color = 'green'
+        }
+        anchor.appendChild(companyPrice)
+        anchor.appendChild(companyImage)
+        line.appendChild(anchor)
+        this.unorderedList.appendChild(line)
+        this.divResults.appendChild(this.unorderedList)
+    }
+}
+
+
+
+
+

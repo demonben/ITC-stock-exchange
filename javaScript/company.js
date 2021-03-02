@@ -1,3 +1,4 @@
+
 let queryString = window.location.search
 let urlParams = new URLSearchParams(queryString)
 let symbol = urlParams.get('symbol')
@@ -10,13 +11,15 @@ function newData() {
 
     fetch(`https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}`).then(response => {
         response.json().then(data => {
-
+            console.log("hey")
             loaderCompany.classList.add('visually-hidden')
             let picture = document.getElementById('company-image')
             picture.src = data.profile.image
             document.getElementById('company-name').innerText = data.profile.companyName
             document.getElementById('company-description').innerText = data.profile.description
             document.getElementById('company-link').innerText = data.profile.website
+            document.getElementById('company-link').href = data.profile.website
+
             document.getElementById('stock-price').innerText = data.profile.price
             let changes = document.getElementById('changes')
             changes.innerText = data.profile.changesPercentage
@@ -39,7 +42,7 @@ function historicalPrice() {
     fetch(`https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`).then(response => {
         response.json().then(data => {
             parsHistoricalPrice(data)
-
+console.log('hey')
         })
     })
 }

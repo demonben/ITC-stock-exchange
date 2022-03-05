@@ -11,7 +11,6 @@ function newData() {
 
     fetch(`https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}`).then(response => {
         response.json().then(data => {
-            console.log("hey")
             loaderCompany.classList.add('visually-hidden')
             let picture = document.getElementById('company-image')
             picture.src = data.profile.image
@@ -29,10 +28,10 @@ function newData() {
 
             if (numberPercents < 0) {
 
-                changes.style.color = 'red'
+                changes.style.color = 'green'
             }
             else if (numberPercents > 0) {
-                changes.style.color = 'green'
+                changes.style.color = 'red'
             }
 
         })

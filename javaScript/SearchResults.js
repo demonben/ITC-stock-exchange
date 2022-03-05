@@ -38,10 +38,10 @@ class SearchResult {
         let percentsChangesSearch = data1.profile.changesPercentage
         let numberPercents = parseFloat(percentsChangesSearch.substring(1, percentsChangesSearch.length - 1))
         if (numberPercents < 0) {
-            companyPrice.style.color = 'red'
+            companyPrice.style.color = 'green'
         }
         else if (numberPercents > 0) {
-            companyPrice.style.color = 'green'
+            companyPrice.style.color = 'red'
         }
         anchor.appendChild(companyPrice)
         anchor.appendChild(companyImage)

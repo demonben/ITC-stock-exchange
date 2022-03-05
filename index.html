@@ -23,26 +23,28 @@
     </div>
     </p>
     <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Type stock symbol..."
-                        aria-label="Search" id="search">
+        <form class="form-inline my-2 my-lg-0">
+            <div id="search-container">
+
+                <input id="search" class="form-control mr-sm-2" type="search" placeholder="Type stock symbol..."
+                    aria-label="Search" id="search">
+
+                <div >
+                    <button id="button" class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+                </div>
             </div>
-            <div class="col-sm">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="button">Search</button>
-                </form>
-            </div>
+        </form>
+    
+    <div class="row" id="results">
+        <ul id="search-results">
+        </ul>
+    </div>
+</div>
+    <div class="row">
+        <div class="spinner-border text-primary visually-hidden" role="status" id="loader">
+            <span class="sr-only"></span>
         </div>
-        <div class="row" id="results">
-            <ul id="search-results">
-            </ul>
-        </div>
-        <div class="row">
-            <div class="spinner-border text-primary visually-hidden" role="status" id="loader">
-                <span class="sr-only"></span>
-            </div>
-        </div>
+    </div>
     </div>
 </body>
 <!-- JavaScript Bundle with Popper -->
